@@ -6,29 +6,29 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Gardener } from './gardener.entity';
-import { PlantNotification } from './plant-notification.entity';
-import { Plant } from './plant.entity';
+import { GardenerEntity } from './gardener.entity';
+import { PlantNotificationEntity } from './plant-notification.entity';
+import { PlantEntity } from './plant.entity';
 
 @Entity({ name: 'plant_registers' })
-export class PlantRegister {
+export class PlantRegisterEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @OneToMany(
-    () => PlantNotification,
+    () => PlantNotificationEntity,
     (plantNotificacion) => plantNotificacion.plantRegister,
   )
-  notifications: PlantNotification[];
+  notifications: PlantNotificationEntity[];
 
   @Column({ name: 'register_date' })
   registerDate: Date;
 
-  @ManyToOne(() => Plant, (plant) => plant.plantRegisters)
+  @ManyToOne(() => PlantEntity, (plant) => plant.plantRegisters)
   @JoinColumn({ name: 'plant_id' })
-  plant: Plant;
+  plant: PlantEntity;
 
-  @ManyToOne(() => Gardener, (gardener) => gardener.registeredPlants)
+  @ManyToOne(() => GardenerEntity, (gardener) => gardener.registeredPlants)
   @JoinColumn({ name: 'gardener_id' })
-  gardener: Gardener;
+  gardener: GardenerEntity;
 }

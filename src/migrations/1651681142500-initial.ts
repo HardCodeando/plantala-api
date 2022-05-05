@@ -14,9 +14,16 @@ export class initial1651681142500 implements MigrationInterface {
             last_name VARCHAR(50),
             email VARCHAR(320) UNIQUE NOT NULL);
     
+
+        CREATE TABLE plants(
+            id SERIAL NOT NULL PRIMARY KEY,
+            binomial_nomenclature VARCHAR(100) UNIQUE,
+            common_name VARCHAR(50),
+            image_url TEXT);
+
         CREATE TABLE plant_details(
             id SERIAL NOT NULL PRIMARY KEY,
-            binomial_nomenclature VARCHAR(100),
+            binomial_nomenclature VARCHAR(100) UNIQUE,
             common_name VARCHAR(50),
             max_temp INTEGER,
             min_temp INTEGER,
@@ -24,18 +31,12 @@ export class initial1651681142500 implements MigrationInterface {
             min_light_lux INTEGER,
             max_env_humid INTEGER,
             min_env_humid INTEGER,
-            image_url TEXT);   
-
-       CREATE TABLE plants(
-            id SERIAL NOT NULL PRIMARY KEY,
-            binomial_nomenclature VARCHAR(100),
-            common_name VARCHAR(50),
             image_url TEXT,
-            plant_details_id INTEGER,
-            CONSTRAINT fk_plant_details
-                FOREIGN KEY(plant_details_id) 
-                    REFERENCES plant_details(id)
-                    ON DELETE SET NULL);
+            plant_id INTEGER,
+            CONSTRAINT fk_plant_id
+                FOREIGN KEY(plant_id) 
+                    REFERENCES plants(id)
+                    ON DELETE SET NULL);   
           
         CREATE TABLE plant_registers(
                 id SERIAL NOT NULL PRIMARY KEY,
@@ -99,8 +100,8 @@ export class initial1651681142500 implements MigrationInterface {
         DROP TABLE plant_requests;  
         DROP TABLE plant_notifications;
         DROP TABLE plant_registers;
-        DROP TABLE plants;
-        DROP TABLE plant_details; 
+        DROP TABLE plant_details;
+        DROP TABLE plants; 
         DROP TABLE configurations;
         DROP TABLE gardeners;
     `);

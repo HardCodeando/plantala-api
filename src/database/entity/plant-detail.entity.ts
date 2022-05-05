@@ -1,11 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { PlantEntity } from './plant.entity';
 
 @Entity({ name: 'plant_details' })
-export class PlantDetail {
+export class PlantDetailEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'binomial_nomenclature' })
+  @Column({ name: 'binomial_nomenclature', unique: true })
   binomialNomenclature: string;
 
   @Column({ name: 'common_name' })
@@ -30,5 +37,9 @@ export class PlantDetail {
   minEnvHumid: number;
 
   @Column({ name: 'image_url' })
-  imageUrl: number;
+  imageUrl: string;
+
+  @OneToOne(() => PlantEntity)
+  @JoinColumn({ name: 'plant_id' })
+  plant: PlantEntity;
 }

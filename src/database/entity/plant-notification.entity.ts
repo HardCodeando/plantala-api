@@ -5,10 +5,10 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { PlantRegister } from './plant-register.entity';
+import { PlantRegisterEntity } from './plant-register.entity';
 
 @Entity({ name: 'plant_notifications' })
-export class PlantNotification {
+export class PlantNotificationEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,9 +19,9 @@ export class PlantNotification {
   reason: string;
 
   @ManyToOne(
-    () => PlantRegister,
+    () => PlantRegisterEntity,
     (plantRegister) => plantRegister.notifications,
   )
   @JoinColumn({ name: 'plant_register_id' })
-  plantRegister: PlantRegister;
+  plantRegister: PlantRegisterEntity;
 }

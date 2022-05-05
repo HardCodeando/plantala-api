@@ -5,10 +5,10 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Gardener } from './gardener.entity';
+import { GardenerEntity } from './gardener.entity';
 
 @Entity({ name: 'plant_requests' })
-export class PlantRequest {
+export class PlantRequestEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,7 +18,7 @@ export class PlantRequest {
   @Column({ name: 'common_name' })
   commonName: string;
 
-  @ManyToOne(() => Gardener, (gardener) => gardener.plantRequests)
+  @ManyToOne(() => GardenerEntity, (gardener) => gardener.plantRequests)
   @JoinColumn({ name: 'gardener_id' })
-  gardener: Gardener;
+  gardener: GardenerEntity;
 }

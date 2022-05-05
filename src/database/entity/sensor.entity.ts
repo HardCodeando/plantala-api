@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
-import { Gardener } from './gardener.entity';
+import { GardenerEntity } from './gardener.entity';
 
 @Entity({ name: 'sensors' })
-export class Sensor {
+export class SensorEntity {
   @PrimaryColumn()
   id: number;
 
@@ -15,7 +15,7 @@ export class Sensor {
   //   @Column({ name: 'sync_time', type: 'timestamptz', nullable: true })
   //   syncTime: Date;
 
-  @ManyToOne(() => Gardener, (gardener) => gardener.reports)
+  @ManyToOne(() => GardenerEntity, (gardener) => gardener.reports)
   @JoinColumn({ name: 'gardener_id' })
-  gardener: Gardener;
+  gardener: GardenerEntity;
 }

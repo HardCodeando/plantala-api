@@ -1,17 +1,11 @@
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
-import { PlantRegister } from './plant-register.entity';
-import { PlantRequest } from './plant-request.entity';
-import { Report } from './report.entity';
-import { Sensor } from './sensor.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { PlantRegisterEntity } from './plant-register.entity';
+import { PlantRequestEntity } from './plant-request.entity';
+import { ReportdEntity } from './report.entity';
+import { SensorEntity } from './sensor.entity';
 
 @Entity({ name: 'gardeners' })
-export class Gardener {
+export class GardenerEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -27,15 +21,15 @@ export class Gardener {
   @Column({ name: 'last_name' })
   lastName: string;
 
-  @OneToMany(() => PlantRegister, (plantRegister) => plantRegister.plant)
-  registeredPlants: PlantRegister[];
+  @OneToMany(() => PlantRegisterEntity, (plantRegister) => plantRegister.plant)
+  registeredPlants: PlantRegisterEntity[];
 
-  @OneToMany(() => PlantRequest, (plantRequest) => plantRequest.gardener)
-  plantRequests: PlantRequest[];
+  @OneToMany(() => PlantRequestEntity, (plantRequest) => plantRequest.gardener)
+  plantRequests: PlantRequestEntity[];
 
-  @OneToMany(() => Report, (report) => report.gardener)
-  reports: Report[];
+  @OneToMany(() => ReportdEntity, (report) => report.gardener)
+  reports: ReportdEntity[];
 
-  @OneToMany(() => Sensor, (sensor) => sensor.gardener)
-  sensors: Sensor[];
+  @OneToMany(() => SensorEntity, (sensor) => sensor.gardener)
+  sensors: SensorEntity[];
 }

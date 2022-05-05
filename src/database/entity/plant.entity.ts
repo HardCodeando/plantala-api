@@ -1,20 +1,12 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { PlantDetail } from './plant-detail.entity';
-import { PlantRegister } from './plant-register.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { PlantRegisterEntity } from './plant-register.entity';
 
 @Entity({ name: 'plants' })
-export class Plant {
+export class PlantEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'binomial_nomenclature' })
+  @Column({ name: 'binomial_nomenclature', unique: true })
   binomialNomenclature: string;
 
   @Column({ name: 'common_name' })
@@ -23,10 +15,6 @@ export class Plant {
   @Column({ name: 'image_url' })
   imageUrl: string;
 
-  @OneToMany(() => PlantRegister, (plantRegister) => plantRegister.plant)
-  plantRegisters: PlantRegister[];
-
-  @OneToOne(() => PlantDetail)
-  @JoinColumn({ name: 'plant_detail_id' })
-  plantDetail: PlantDetail;
+  @OneToMany(() => PlantRegisterEntity, (plantRegister) => plantRegister.plant)
+  plantRegisters: PlantRegisterEntity[];
 }
