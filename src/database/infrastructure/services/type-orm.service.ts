@@ -18,7 +18,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       migrations: ['dist/migrations/**/*.{ts,js}'],
       migrationsTableName: 'typeorm_migrations',
       autoLoadEntities: true,
-      // migrationsRun: true,
+      migrationsRun: true,
       logger: 'file',
       // ssl: true,
       // extra: {
