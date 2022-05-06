@@ -3,7 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { GetPlantsInteractor } from '../../interactor/get-plants';
 
 @ApiTags('Plants')
-@Controller()
+@Controller('plants')
 export class PlantsController {
   constructor(private readonly getPlansInteractor: GetPlantsInteractor) {}
 
