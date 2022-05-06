@@ -23,7 +23,8 @@
     "migration:up": "yarn run typeorm migration:run",
     "migration:down": "yarn run typeorm migration:revert",
     "migration:generate": "yarn run typeorm migration:generate",
-    "migration:create": "yarn run typeorm migration:create"
+    "migration:create": "yarn run typeorm migration:create",
+    "postinstall": "yarn run migration:up"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.7",
